@@ -1,0 +1,114 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Portal.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- ==> Custom CSS for hover effects -->
+    <style>
+        /* ==> Alt menü hover efekti */
+        .submenu-item:hover {
+            background-color: #6c757d !important; /* Açık gri arkaplan */
+            border-radius: 0.25rem;
+        }
+
+        /* ==> Ana menü hover efekti */
+        .main-menu-item:hover {
+            background-color: #495057 !important; /* Ana menü için biraz daha koyu gri */
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease;
+        }
+
+        /* ==> Ana menü expanded durumunda farklı renk */
+        .main-menu-item[aria-expanded="true"] {
+            background-color: #343a40 !important;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- ==> Vertical Sidebar Menu -->
+        <div class="position-fixed top-0 start-0 h-100 bg-dark" style="width: 250px; z-index: 1040;">
+            <div class="navbar-nav flex-column p-3">
+                <div class="navbar-brand text-white mb-3 h4">Portal</div>
+
+                <!-- ==> Personel Collapse Menu -->
+                <div class="nav-item">
+                    <!-- ==> Ana menü hover efekti için class eklendi -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center main-menu-item px-2 py-2" data-bs-toggle="collapse" href="#personelMenu" role="button" aria-expanded="false" aria-controls="personelMenu">
+                        <span><i class="bi bi-people me-2"></i>Personel</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="personelMenu">
+                        <div class="nav flex-column ms-3">
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Personel-Bir.aspx">Bir</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Personel-Iki.aspx">İki</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Personel-Uc.aspx">Üç</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==> Denetim Collapse Menu -->
+                <div class="nav-item">
+                    <!-- ==> Ana menü hover efekti için class eklendi -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center main-menu-item px-2 py-2" data-bs-toggle="collapse" href="#denetimMenu" role="button" aria-expanded="false" aria-controls="denetimMenu">
+                        <span><i class="bi bi-search me-2"></i>Denetim</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="denetimMenu">
+                        <div class="nav flex-column ms-3">
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Denetim-Bir.aspx">Bir</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Denetim-Iki.aspx">İki</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Denetim-Uc.aspx">Üç</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==> Cimer Collapse Menu -->
+                <div class="nav-item">
+                    <!-- ==> Ana menü hover efekti için class eklendi -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center main-menu-item px-2 py-2" data-bs-toggle="collapse" href="#cimerMenu" role="button" aria-expanded="false" aria-controls="cimerMenu">
+                        <span><i class="bi bi-envelope me-2"></i>Cimer</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="cimerMenu">
+                        <div class="nav flex-column ms-3">
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Cimer-Bir.aspx">Bir</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Cimer-Iki.aspx">İki</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Cimer-Uc.aspx">Üç</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==> Yönetim Collapse Menu -->
+                <div class="nav-item">
+                    <!-- ==> Ana menü hover efekti için class eklendi -->
+                    <a class="nav-link text-white d-flex justify-content-between align-items-center main-menu-item px-2 py-2" data-bs-toggle="collapse" href="#yonetimMenu" role="button" aria-expanded="false" aria-controls="yonetimMenu">
+                        <span><i class="bi bi-gear me-2"></i>Yönetim</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="yonetimMenu">
+                        <div class="nav flex-column ms-3">
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Yonetim-Bir.aspx">Bir</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Yonetim-Iki.aspx">İki</a>
+                            <a class="nav-link text-white py-1 px-2 submenu-item" href="Yonetim-Uc.aspx">Üç</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==> Main Content Area -->
+        <div class="container-fluid" style="padding-left: 265px; padding-top: 15px;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
