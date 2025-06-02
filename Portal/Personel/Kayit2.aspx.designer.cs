@@ -11,80 +11,134 @@ namespace Portal.Personel
 {
 
 
-    public partial class Kayit
+    public partial class Kayit2
     {
 
         /// <summary>
-        /// tcKimlik control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tcKimlik;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// sicilNo control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sicilNo;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// ad control.
+        /// txtTCKimlik control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ad;
+        protected global::System.Web.UI.WebControls.TextBox txtTCKimlik;
 
         /// <summary>
-        /// soyad control.
+        /// btnTCSorgula control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox soyad;
+        protected global::System.Web.UI.WebControls.Button btnTCSorgula;
 
         /// <summary>
-        /// dogumYeri control.
+        /// txtSicilNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dogumYeri;
+        protected global::System.Web.UI.WebControls.TextBox txtSicilNo;
 
         /// <summary>
-        /// dogumTarihi control.
+        /// btnSicilSorgula control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dogumTarihi;
+        protected global::System.Web.UI.WebControls.Button btnSicilSorgula;
 
         /// <summary>
-        /// cinsiyet control.
+        /// txtAd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cinsiyet;
+        protected global::System.Web.UI.WebControls.TextBox txtAd;
 
         /// <summary>
-        /// kanGrubu control.
+        /// txtSoyad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList kanGrubu;
+        protected global::System.Web.UI.WebControls.TextBox txtSoyad;
+
+        /// <summary>
+        /// txtDogumYeri control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDogumYeri;
+
+        /// <summary>
+        /// txtDogumTarihi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDogumTarihi;
+
+        /// <summary>
+        /// ddlCinsiyet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCinsiyet;
+
+        /// <summary>
+        /// ddlKanGrubu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlKanGrubu;
+
+        /// <summary>
+        /// imgPreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPreview;
+
+        /// <summary>
+        /// hfFotografYolu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfFotografYolu;
 
         /// <summary>
         /// ddlCalismaDurumu control.
@@ -96,300 +150,273 @@ namespace Portal.Personel
         protected global::System.Web.UI.WebControls.DropDownList ddlCalismaDurumu;
 
         /// <summary>
-        /// durum control.
+        /// ddlDurum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList durum;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDurum;
 
         /// <summary>
-        /// unvan control.
+        /// txtUnvan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList unvan;
+        protected global::System.Web.UI.WebControls.TextBox txtUnvan;
 
         /// <summary>
-        /// meslekiUnvan control.
+        /// txtMeslekiUnvan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox meslekiUnvan;
+        protected global::System.Web.UI.WebControls.TextBox txtMeslekiUnvan;
 
         /// <summary>
-        /// statu control.
+        /// ddlStatu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList statu;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatu;
 
         /// <summary>
-        /// birim control.
+        /// txtBirim control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList birim;
+        protected global::System.Web.UI.WebControls.TextBox txtBirim;
 
         /// <summary>
-        /// kurumBaslama control.
+        /// txtKurumaBaslamaTarihi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox kurumBaslama;
+        protected global::System.Web.UI.WebControls.TextBox txtKurumaBaslamaTarihi;
 
         /// <summary>
-        /// ilkGiris control.
+        /// txtIlkGirisTarihi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ilkGiris;
+        protected global::System.Web.UI.WebControls.TextBox txtIlkGirisTarihi;
 
         /// <summary>
-        /// kadroDerecesi control.
+        /// txtKadroDerecesi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox kadroDerecesi;
+        protected global::System.Web.UI.WebControls.TextBox txtKadroDerecesi;
 
         /// <summary>
-        /// ogrenimDurumu control.
+        /// ddlOgrenimDurumu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ogrenimDurumu;
+        protected global::System.Web.UI.WebControls.DropDownList ddlOgrenimDurumu;
 
         /// <summary>
-        /// ceptel control.
+        /// txtCepTelefonu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ceptel;
+        protected global::System.Web.UI.WebControls.TextBox txtCepTelefonu;
 
         /// <summary>
-        /// evTel control.
+        /// txtEvTelefonu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox evTel;
+        protected global::System.Web.UI.WebControls.TextBox txtEvTelefonu;
 
         /// <summary>
-        /// dahiliTel control.
+        /// txtDahiliTelefon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dahiliTel;
+        protected global::System.Web.UI.WebControls.TextBox txtDahiliTelefon;
 
         /// <summary>
-        /// email control.
+        /// txtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// adres control.
+        /// txtAdres control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox adres;
+        protected global::System.Web.UI.WebControls.TextBox txtAdres;
 
         /// <summary>
-        /// acilDurumKisi control.
+        /// txtAcilDurumKisi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox acilDurumKisi;
+        protected global::System.Web.UI.WebControls.TextBox txtAcilDurumKisi;
 
         /// <summary>
-        /// acilDurumTel control.
+        /// txtAcilDurumTelefonu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox acilDurumTel;
+        protected global::System.Web.UI.WebControls.TextBox txtAcilDurumTelefonu;
 
         /// <summary>
-        /// medeniHal control.
+        /// ddlMedeniHal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList medeniHal;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMedeniHal;
 
         /// <summary>
-        /// askerlikDurumu control.
+        /// ddlAskerlikDurumu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList askerlikDurumu;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAskerlikDurumu;
 
         /// <summary>
-        /// engelDurumu control.
+        /// ddlEngelDurumu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList engelDurumu;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEngelDurumu;
 
         /// <summary>
-        /// sendika control.
+        /// txtSendika control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList sendika;
+        protected global::System.Web.UI.WebControls.TextBox txtSendika;
 
         /// <summary>
-        /// engelAciklama control.
+        /// txtEngelAciklamasi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox engelAciklama;
+        protected global::System.Web.UI.WebControls.TextBox txtEngelAciklamasi;
 
         /// <summary>
-        /// emeklilik control.
+        /// ddlEmeklilik control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emeklilik;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEmeklilik;
 
         /// <summary>
-        /// yaslilik control.
+        /// ddlYaslilik control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox yaslilik;
+        protected global::System.Web.UI.WebControls.DropDownList ddlYaslilik;
 
         /// <summary>
-        /// emekliAciklama control.
+        /// txtEmekliAciklamasi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox emekliAciklama;
+        protected global::System.Web.UI.WebControls.TextBox txtEmekliAciklamasi;
 
         /// <summary>
-        /// hdnPersonelData control.
+        /// chkAktif control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnPersonelData;
+        protected global::System.Web.UI.WebControls.CheckBox chkAktif;
 
         /// <summary>
-        /// hdnIslemTipi control.
+        /// btnKaydet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnIslemTipi;
+        protected global::System.Web.UI.WebControls.Button btnKaydet;
 
         /// <summary>
-        /// hdnPersonelId control.
+        /// btnGuncelle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnPersonelId;
+        protected global::System.Web.UI.WebControls.Button btnGuncelle;
 
         /// <summary>
-        /// btnHiddenKaydet control.
+        /// btnYazdir control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHiddenKaydet;
+        protected global::System.Web.UI.WebControls.Button btnYazdir;
 
         /// <summary>
-        /// btnHiddenGuncelle control.
+        /// btnTemizle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHiddenGuncelle;
+        protected global::System.Web.UI.WebControls.Button btnTemizle;
 
         /// <summary>
-        /// btnHiddenTCSorgula control.
+        /// hfPersonelID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHiddenTCSorgula;
-
-        /// <summary>
-        /// btnHiddenSicilSorgula control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHiddenSicilSorgula;
-
-        /// <summary>
-        /// hdnSonucMesaji control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnSonucMesaji;
-
-        /// <summary>
-        /// hdnSonucTipi control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnSonucTipi;
+        protected global::System.Web.UI.WebControls.HiddenField hfPersonelID;
     }
 }

@@ -1,0 +1,437 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.Services;
+
+namespace Portal.Personel
+{
+    public partial class Kayit : System.Web.UI.Page
+    {
+        // ==> Sayfa yükleme işlemi
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                // Sayfa ilk yüklendiğinde yapılacak işlemler
+                InitializePage();
+            }
+        }
+
+        // ==> Sayfa başlangıç ayarları
+        private void InitializePage()
+        {
+            // Form alanlarını temizle
+            ClearForm();
+
+            // Varsayılan değerleri ayarla
+            SetDefaultValues();
+        }
+
+        // ==> TC Kimlik No sorgulama (AJAX)
+        [WebMethod]
+        public static object GetPersonelByTC(string tcKimlik)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(tcKimlik) || tcKimlik.Length != 11)
+                {
+                    return new { success = false, message = "Geçersiz TC Kimlik No" };
+                }
+
+                PersonelModel personel = PersonelDAL.GetPersonelByTC(tcKimlik);
+
+                if (personel != null)
+                {
+                    return new
+                    {
+                        success = true,
+                        exists = true,
+                        data = new
+                        {
+                            PersonelID = personel.PersonelID,
+                            TCKimlikNo = personel.TCKimlikNo,
+                            SicilNo = personel.SicilNo,
+                            Ad = personel.Ad,
+                            Soyad = personel.Soyad,
+                            DogumYeri = personel.DogumYeri,
+                            DogumTarihi = personel.DogumTarihi?.ToString("yyyy-MM-dd"),
+                            Cinsiyet = personel.Cinsiyet,
+                            KanGrubu = personel.KanGrubu,                            
+                            CalismaDurumu = personel.CalismaDurumu,
+                            Durum = personel.Durum,
+                            Unvan = personel.Unvan,
+                            MeslekiUnvan = personel.MeslekiUnvan,
+                            Statu = personel.Statu,
+                            Birim = personel.Birim,
+                            KurumaBaslamaTarihi = personel.KurumaBaslamaTarihi.ToString("yyyy-MM-dd"),
+                            IlkGirisTarihi = personel.IlkGirisTarihi?.ToString("yyyy-MM-dd"),
+                            KadroDerecesi = personel.KadroDerecesi,
+                            OgrenimDurumu = personel.OgrenimDurumu,
+                            CepTelefonu = personel.CepTelefonu,
+                            EvTelefonu = personel.EvTelefonu,
+                            DahiliTelefon = personel.DahiliTelefon,
+                            Email = personel.Email,
+                            Adres = personel.Adres,
+                            AcilDurumKisi = personel.AcilDurumKisi,
+                            AcilDurumTelefonu = personel.AcilDurumTelefonu,
+                            MedeniHal = personel.MedeniHal,
+                            AskerlikDurumu = personel.AskerlikDurumu,
+                            EngelDurumu = personel.EngelDurumu,
+                            EngelAciklamasi = personel.EngelAciklamasi,
+                            Sendika = personel.Sendika,
+                            Emeklilik = personel.Emeklilik,
+                            Yaslilik = personel.Yaslilik,
+                            EmekliAciklamasi = personel.EmekliAciklamasi
+                        }
+                    };
+                }
+                else
+                {
+                    return new { success = true, exists = false, message = "Personel bulunamadı" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new { success = false, message = "Sistem hatası: " + ex.Message };
+            }
+        }
+
+        // ==> Sicil No sorgulama (AJAX)
+        [WebMethod]
+        public static object GetPersonelBySicil(string sicilNo)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(sicilNo))
+                {
+                    return new { success = false, message = "Sicil No boş olamaz" };
+                }
+
+                PersonelModel personel = PersonelDAL.GetPersonelBySicil(sicilNo);
+
+                if (personel != null)
+                {
+                    return new
+                    {
+                        success = true,
+                        exists = true,
+                        data = new
+                        {
+                            PersonelID = personel.PersonelID,
+                            TCKimlikNo = personel.TCKimlikNo,
+                            AdSoyad = personel.AdSoyad,
+                            Unvan = personel.Unvan,
+                            Birim = personel.Birim,
+                            CalismaDurumu = personel.CalismaDurumu
+                        }
+                    };
+                }
+                else
+                {
+                    return new { success = true, exists = false, message = "Personel bulunamadı" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new { success = false, message = "Sistem hatası: " + ex.Message };
+            }
+        }
+
+        // ==> TC Kimlik No varlık kontrolü (AJAX)
+        [WebMethod]
+        public static object CheckTCExists(string tcKimlik, int excludePersonelId = 0)
+        {
+            try
+            {
+                bool exists = PersonelDAL.IsTCKimlikExists(tcKimlik, excludePersonelId);
+                return new { success = true, exists = exists };
+            }
+            catch (Exception ex)
+            {
+                return new { success = false, message = "Sistem hatası: " + ex.Message };
+            }
+        }
+
+        // ==> Sicil No varlık kontrolü (AJAX)
+        [WebMethod]
+        public static object CheckSicilExists(string sicilNo, int excludePersonelId = 0)
+        {
+            try
+            {
+                bool exists = PersonelDAL.IsSicilNoExists(sicilNo, excludePersonelId);
+                return new { success = true, exists = exists };
+            }
+            catch (Exception ex)
+            {
+                return new { success = false, message = "Sistem hatası: " + ex.Message };
+            }
+        }
+
+        // ==> Personel kayıt işlemi
+        protected void btnKaydet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Form verilerinden PersonelModel oluştur
+                PersonelModel personel = CreatePersonelFromForm();
+
+                // Yeni kayıt mı güncelleme mi kontrol et
+                bool isUpdate = !string.IsNullOrEmpty(hfPersonelID.Value) && hfPersonelID.Value != "0";
+
+                if (isUpdate)
+                {
+                    // Güncelleme işlemi
+                    personel.PersonelID = Convert.ToInt32(hfPersonelID.Value);
+                    personel.GuncelleyenKullanici = Session["KullaniciAdi"]?.ToString() ?? "System";
+
+                    int result = PersonelDAL.PersonelGuncelle(personel);
+
+                    if (result > 0)
+                    {
+                        ShowMessage("Personel bilgileri başarıyla güncellendi.", "success");
+                        ClearForm();
+                    }
+                    else
+                    {
+                        ShowMessage("Güncelleme işlemi başarısız.", "danger");
+                    }
+                }
+                else
+                {
+                    // Yeni kayıt işlemi
+                    personel.KaydedenKullanici = Session["KullaniciAdi"]?.ToString() ?? "System";
+
+                    int newPersonelID = PersonelDAL.PersonelEkle(personel);
+
+                    if (newPersonelID > 0)
+                    {
+                        ShowMessage($"Personel başarıyla kaydedildi. ID: {newPersonelID}", "success");
+                        ClearForm();
+                    }
+                    else
+                    {
+                        ShowMessage("Kayıt işlemi başarısız.", "danger");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Sistem hatası: " + ex.Message, "danger");
+            }
+        }
+
+        // ==> Form verilerinden PersonelModel oluştur
+        private PersonelModel CreatePersonelFromForm()
+        {
+            PersonelModel personel = new PersonelModel
+            {
+                TCKimlikNo = txtTCKimlik.Text.Trim(),
+                SicilNo = txtSicilNo.Text.Trim(),
+                Ad = txtAd.Text.Trim(),
+                Soyad = txtSoyad.Text.Trim(),
+                DogumYeri = txtDogumYeri.Text.Trim(),
+                Cinsiyet = ddlCinsiyet.SelectedValue,
+                KanGrubu = ddlKanGrubu.SelectedValue,
+                CalismaDurumu = ddlCalismaDurumu.SelectedValue,
+                Durum = ddlDurum.SelectedValue,
+                Unvan = txtUnvan.Text.Trim(),
+                MeslekiUnvan = txtMeslekiUnvan.Text.Trim(),
+                Statu = ddlStatu.SelectedValue,
+                Birim = txtBirim.Text.Trim(),
+                KadroDerecesi = string.IsNullOrEmpty(txtKadroDerecesi.Text) ? (int?)null : Convert.ToInt32(txtKadroDerecesi.Text),
+                OgrenimDurumu = ddlOgrenimDurumu.SelectedValue,
+                CepTelefonu = txtCepTelefonu.Text.Trim(),
+                EvTelefonu = txtEvTelefonu.Text.Trim(),
+                DahiliTelefon = txtDahiliTelefon.Text.Trim(),
+                Email = txtEmail.Text.Trim(),
+                Adres = txtAdres.Text.Trim(),
+                AcilDurumKisi = txtAcilDurumKisi.Text.Trim(),
+                AcilDurumTelefonu = txtAcilDurumTelefonu.Text.Trim(),
+                MedeniHal = ddlMedeniHal.SelectedValue,
+                AskerlikDurumu = ddlAskerlikDurumu.SelectedValue,
+                EngelDurumu = ddlEngelDurumu.SelectedValue,
+                EngelAciklamasi = txtEngelAciklamasi.Text.Trim(),
+                Sendika = txtSendika.Text.Trim(),
+                Emeklilik = ddlEmeklilik.SelectedValue,
+                Yaslilik = ddlYaslilik.SelectedValue,
+                EmekliAciklamasi = txtEmekliAciklamasi.Text.Trim(),
+                Aktif = chkAktif.Checked
+            };
+
+            // Tarih alanları
+            if (!string.IsNullOrEmpty(txtDogumTarihi.Text))
+                personel.DogumTarihi = Convert.ToDateTime(txtDogumTarihi.Text);
+
+            if (!string.IsNullOrEmpty(txtKurumaBaslamaTarihi.Text))
+                personel.KurumaBaslamaTarihi = Convert.ToDateTime(txtKurumaBaslamaTarihi.Text);
+
+            if (!string.IsNullOrEmpty(txtIlkGirisTarihi.Text))
+                personel.IlkGirisTarihi = Convert.ToDateTime(txtIlkGirisTarihi.Text);
+
+            return personel;
+        }
+
+        // ==> Form temizleme
+        protected void btnTemizle_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+            ShowMessage("Form temizlendi.", "info");
+        }
+
+        // ==> Form alanlarını temizle
+        private void ClearForm()
+        {
+            // Text alanları
+            txtTCKimlik.Text = "";
+            txtSicilNo.Text = "";
+            txtAd.Text = "";
+            txtSoyad.Text = "";
+            txtDogumYeri.Text = "";
+            txtDogumTarihi.Text = "";
+            txtUnvan.Text = "";
+            txtMeslekiUnvan.Text = "";
+            txtBirim.Text = "";
+            txtKurumaBaslamaTarihi.Text = "";
+            txtIlkGirisTarihi.Text = "";
+            txtKadroDerecesi.Text = "";
+            txtCepTelefonu.Text = "";
+            txtEvTelefonu.Text = "";
+            txtDahiliTelefon.Text = "";
+            txtEmail.Text = "";
+            txtAdres.Text = "";
+            txtAcilDurumKisi.Text = "";
+            txtAcilDurumTelefonu.Text = "";
+            txtEngelAciklamasi.Text = "";
+            txtSendika.Text = "";
+            txtEmekliAciklamasi.Text = "";
+
+            // DropDownList'ler
+            ddlCinsiyet.SelectedIndex = 0;
+            ddlKanGrubu.SelectedIndex = 0;
+            ddlCalismaDurumu.SelectedIndex = 0;
+            ddlDurum.SelectedIndex = 0;
+            ddlStatu.SelectedIndex = 0;
+            ddlOgrenimDurumu.SelectedIndex = 0;
+            ddlMedeniHal.SelectedIndex = 0;
+            ddlAskerlikDurumu.SelectedIndex = 0;
+            ddlEngelDurumu.SelectedIndex = 0;
+            ddlEmeklilik.SelectedIndex = 0;
+            ddlYaslilik.SelectedIndex = 0;
+
+            // CheckBox ve Hidden Field
+            chkAktif.Checked = true;
+            hfPersonelID.Value = "0";
+        }
+
+        // ==> Varsayılan değerleri ayarla
+        private void SetDefaultValues()
+        {
+            chkAktif.Checked = true;
+            ddlCalismaDurumu.SelectedValue = "aktif";
+            txtKurumaBaslamaTarihi.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        // ==> Mesaj gösterme
+        private void ShowMessage(string message, string type)
+        {
+            string alertClass = "";
+            switch (type.ToLower())
+            {
+                case "success":
+                    alertClass = "alert-success";
+                    break;
+                case "danger":
+                case "error":
+                    alertClass = "alert-danger";
+                    break;
+                case "warning":
+                    alertClass = "alert-warning";
+                    break;
+                case "info":
+                default:
+                    alertClass = "alert-info";
+                    break;
+            }
+
+            string script = $@"
+                showAlert('{message}', '{alertClass}');
+            ";
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowMessage", script, true);
+        }
+
+        // ==> Personel ID'ye göre form doldur (güncelleme için)
+        private void LoadPersonelData(int personelId)
+        {
+            try
+            {
+                PersonelModel personel = PersonelDAL.GetPersonelByID(personelId);
+                if (personel != null)
+                {
+                    PopulateFormWithPersonel(personel);
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Personel bilgileri yüklenirken hata oluştu: " + ex.Message, "danger");
+            }
+        }
+
+        // ==> Form alanlarını personel bilgileri ile doldur
+        private void PopulateFormWithPersonel(PersonelModel personel)
+        {
+            hfPersonelID.Value = personel.PersonelID.ToString();
+            txtTCKimlik.Text = personel.TCKimlikNo;
+            txtSicilNo.Text = personel.SicilNo;
+            txtAd.Text = personel.Ad;
+            txtSoyad.Text = personel.Soyad;
+            txtDogumYeri.Text = personel.DogumYeri;
+            txtDogumTarihi.Text = personel.DogumTarihi?.ToString("yyyy-MM-dd");
+            ddlCinsiyet.SelectedValue = personel.Cinsiyet ?? "";
+            ddlKanGrubu.SelectedValue = personel.KanGrubu ?? "";
+            ddlCalismaDurumu.SelectedValue = personel.CalismaDurumu ?? "";
+            ddlDurum.SelectedValue = personel.Durum ?? "";
+            txtUnvan.Text = personel.Unvan;
+            txtMeslekiUnvan.Text = personel.MeslekiUnvan;
+            ddlStatu.SelectedValue = personel.Statu ?? "";
+            txtBirim.Text = personel.Birim;
+            txtKurumaBaslamaTarihi.Text = personel.KurumaBaslamaTarihi.ToString("yyyy-MM-dd");
+            txtIlkGirisTarihi.Text = personel.IlkGirisTarihi?.ToString("yyyy-MM-dd");
+            txtKadroDerecesi.Text = personel.KadroDerecesi?.ToString();
+            ddlOgrenimDurumu.SelectedValue = personel.OgrenimDurumu ?? "";
+            txtCepTelefonu.Text = personel.CepTelefonu;
+            txtEvTelefonu.Text = personel.EvTelefonu;
+            txtDahiliTelefon.Text = personel.DahiliTelefon;
+            txtEmail.Text = personel.Email;
+            txtAdres.Text = personel.Adres;
+            txtAcilDurumKisi.Text = personel.AcilDurumKisi;
+            txtAcilDurumTelefonu.Text = personel.AcilDurumTelefonu;
+            ddlMedeniHal.SelectedValue = personel.MedeniHal ?? "";
+            ddlAskerlikDurumu.SelectedValue = personel.AskerlikDurumu ?? "";
+            ddlEngelDurumu.SelectedValue = personel.EngelDurumu ?? "";
+            txtEngelAciklamasi.Text = personel.EngelAciklamasi;
+            txtSendika.Text = personel.Sendika;
+            ddlEmeklilik.SelectedValue = personel.Emeklilik ?? "";
+            ddlYaslilik.SelectedValue = personel.Yaslilik ?? "";
+            txtEmekliAciklamasi.Text = personel.EmekliAciklamasi;
+            chkAktif.Checked = personel.Aktif;
+
+        }
+
+        // ==> Query string'den PersonelID al ve formu doldur
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                string personelIdParam = Request.QueryString["PersonelID"];
+                if (!string.IsNullOrEmpty(personelIdParam) && int.TryParse(personelIdParam, out int personelId))
+                {
+                    LoadPersonelData(personelId);
+                }
+            }
+        }
+    }
+}

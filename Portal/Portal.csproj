@@ -70,9 +70,12 @@
     <Content Include="01_css\site.css" />
     <Content Include="02_js\site.js" />
     <Content Include="Personel\Kayit.aspx" />
+    <Content Include="Personel\Liste.aspx" />
+    <Content Include="Personel\TextFile1.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\DatabaseHelper.cs" />
     <Compile Include="Personel\Kayit.aspx.cs">
       <DependentUpon>Kayit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -80,6 +83,15 @@
     <Compile Include="Personel\Kayit.aspx.designer.cs">
       <DependentUpon>Kayit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Personel\Liste.aspx.cs">
+      <DependentUpon>Liste.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Personel\Liste.aspx.designer.cs">
+      <DependentUpon>Liste.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Personel\PersonelDAL.cs" />
+    <Compile Include="Personel\PersonelModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
